@@ -4,8 +4,8 @@ from pynetdicom import AE, evt, AllStoragePresentationContexts
 from pynetdicom.sop_class import PatientRootQueryRetrieveInformationModelMove
 from pydicom import Dataset
 
-STORAGE_DIR = "/home/augustus/Projects/Sectra_PACS_DICOM_Project/DICOM_King/Pacs_Vault"
-CLIENT_DOWNLOAD_DIR = "/home/augustus/Projects/Sectra_PACS_DICOM_Project/DICOM_King/Client_Downloads"
+STORAGE_DIR = "/home/augustus/Projects/PACS_DICOM_Project/DICOM_King/Pacs_Vault"
+CLIENT_DOWNLOAD_DIR = "/home/augustus/Projects/PACS_DICOM_Project/DICOM_King/Client_Downloads"
 os.makedirs(CLIENT_DOWNLOAD_DIR, exist_ok=True)
 
 def handle_incoming_store(event):
@@ -52,7 +52,7 @@ def execute_pacs_move():
     move_payload.StudyInstanceUID = target_study_uid
 
     print("[2] Dialing MiniPACS on primary association port 11112...")
-    assoc = client_ae.associate("127.0.0.1", 11112, ae_title="SECTRA_MINI_PACS")
+    assoc = client_ae.associate("127.0.0.1", 11112, ae_title="MINI_PACS")
     
     if assoc.is_established:
         print(f"[3] Association cleared. Sending C-MOVE request payload...")

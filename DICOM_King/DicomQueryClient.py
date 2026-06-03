@@ -3,7 +3,7 @@ from pynetdicom import AE
 from pynetdicom.sop_class import PatientRootQueryRetrieveInformationModelFind
 from pydicom import Dataset
 
-STORAGE_DIR = "/home/augustus/Projects/Sectra_PACS_DICOM_Project/DICOM_King/Pacs_Vault"
+STORAGE_DIR = "/home/augustus/Projects/PACS_DICOM_Project/DICOM_King/Pacs_Vault"
 
 def get_a_real_patient_id():
     """Scans the vault filesystem to find a real, active Patient ID automatically."""
@@ -38,7 +38,7 @@ def execute_pacs_search():
     search_payload.StudyInstanceUID = ""         # Requesting the server to return this field
 
     # Attempt to associate with the PACS server on port 11112
-    assoc = ae.associate("127.0.0.1", 11112, ae_title="SECTRA_MINI_PACS")
+    assoc = ae.associate("127.0.0.1", 11112, ae_title="MINI_PACS")
     
     if assoc.is_established:
         print(f"[1] Connection Established. Sending C-FIND query...\n")

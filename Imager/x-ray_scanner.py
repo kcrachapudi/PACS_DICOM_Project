@@ -4,9 +4,9 @@ import time
 import socket
 
 # Force absolute pathing to match the bridge exactly
-BASE_DIR = "/home/augustus/Projects/Sectra_Project"
-WORKLIST_DIR = "/home/augustus/Projects/Sectra_Project/Scanner_Worklist"
-PACS_DIR = "/home/augustus/Projects/Sectra_Project/Sectra_Storage"
+BASE_DIR = "/home/augustus/Projects/PACS_DICOM_Project"
+WORKLIST_DIR = "/home/augustus/Projects/PACS_DICOM_Project/Scanner_Worklist"
+PACS_DIR = "/home/augustus/Projects/PACS_DICOM_Project/Storage"
 VT, FS, CR = b'\x0b', b'\x1c', b'\x0d'
 
 print(f"[X-Ray Scanner] Modality active. Monitoring worklist queue: {WORKLIST_DIR}")
@@ -51,26 +51,26 @@ while True:
             json.dump(dicom_mockup, pacs_file, indent=2)
         print(f"[DICOM C-STORE] Archived complete image file to storage pool.")
         
-        print("[Sectra PACS] Compiling Radiology Text Report & Streaming URL...")
+        print("[PACS] Compiling Radiology Text Report & Streaming URL...")
         time.sleep(1)
         
         accession = order_data['accession_number']
-        sectra_url = f"https://sectra.hospital.local/viewer?accession={accession}"
+        pacs_url = f"https://hospital.local/viewer?accession={accession}"
         
         hl7_oru = (
-            "MSH|^~\\&|SECTRA|PACS|EPIC|HOSPITAL|202605191202||ORU^R01|MSG00003|P|2.3|\r"
+            "MSH|^~\\&|EMR|PACS|EPIC|HOSPITAL|202605191202||ORU^R01|MSG00003|P|2.3|\r"
             f"PID|||{order_data['patient_id']}^^^MRN||{order_data['patient_name']}||\r"
             f"OBX|1|TX|RAD-REPORT^Report||FINDINGS: Clean fracture along distal radius. Alignment required.||\r"
-            f"OBX|2|RP|VIEW-URL^Sectra Link||{sectra_url}|||"
+            f"OBX|2|RP|VIEW-URL^PACS Link||{pacs_url}|||"
         )
         
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as hospital_conn:
                 hospital_conn.connect(('127.0.0.1', 5555))
                 hospital_conn.sendall(VT + hl7_oru.encode('utf-8') + FS + CR)
-                print("[Sectra PACS] HL7 ORU result pushed to EMR. Loop closed.")
+                print("[PACS] HL7 ORU result pushed to EMR. Loop closed.")
         except Exception as e:
-            print(f"[Sectra PACS] Failed to dispatch report back to EMR: {e}")
+            print(f"[PACS] Failed to dispatch report back to EMR: {e}")
             
         os.remove(worklist_file)
         

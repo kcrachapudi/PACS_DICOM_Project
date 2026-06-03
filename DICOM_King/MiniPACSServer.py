@@ -7,8 +7,8 @@ from pynetdicom.sop_class import (
 )
 from pydicom import dcmread, Dataset
 
-STORAGE_DIR = "/home/augustus/Projects/Sectra_PACS_DICOM_Project/DICOM_King/Pacs_Vault"
-PACS_AE_TITLE = "SECTRA_MINI_PACS"
+STORAGE_DIR = "/home/augustus/Projects/PACS_DICOM_Project/DICOM_King/Pacs_Vault"
+PACS_AE_TITLE = "MINI_PACS"
 LISTEN_PORT = 11112
 
 def handle_store(event):

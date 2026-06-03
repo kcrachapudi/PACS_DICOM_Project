@@ -1,7 +1,7 @@
 # Deep-Dive Engineering Guide: The PACS Ecosystem
 
 ## 1. Introduction & Core Architecture
-A **PACS** (Picture Archiving and Communication System) is an enterprise-tier network infrastructure designed to ingest, catalog, store, and distribute massive volumes of binary DICOM objects across a medical network. A modern PACS platform (like a Sectra enterprise server) is not simply a passive network directory folder. It consists of a multi-tiered architecture that separates transactional text routing from high-capacity binary storage.
+A **PACS** (Picture Archiving and Communication System) is an enterprise-tier network infrastructure designed to ingest, catalog, store, and distribute massive volumes of binary DICOM objects across a medical network. A modern PACS platform (like a  enterprise server) is not simply a passive network directory folder. It consists of a multi-tiered architecture that separates transactional text routing from high-capacity binary storage.
 
 ```
        +--------------------------------------------+
@@ -10,7 +10,7 @@ A **PACS** (Picture Archiving and Communication System) is an enterprise-tier ne
                              │
                              ▼ (HL7 Result Protocol)
        +--------------------------------------------+
-       |                 Sectra PACS                |
+       |                  PACS                |
        |  ┌──────────────────┐  ┌────────────────┐  |
        |  | Relational DB    |  | Storage Tier   |  |
        |  | (SQL Metadata)   |  | (SAN/NAS Vault)|  |
@@ -81,7 +81,7 @@ Because a PACS archives protected health information (PHI), security parameters 
 * **Node Authentication:** A PACS will completely refuse a network connection from any IP address or machine whose AE Title is not explicitly pre-registered in its internal routing database firewall. This prevents unauthorized laptops or rogue servers from sniffing data on the medical network.
 * **Data at Rest Security:** Modern PACS platforms utilize AES-256 bit encryption across the storage arrays. Any direct file-level tampering or external extraction attempts render the binary files unreadable without database authorization keys.
 
-### Talking Points for the Sectra Interview Panel
+### Talking Points for the  Interview Panel
 When discussing this architectural workflow with the integration engineering team, leverage this structured narrative to prove your systems fluency:
 
 1. **Decoupled Lifecycle Architecture:** Highlight your understanding of how a PACS completely separates textual index metadata queries (`C-FIND` hitting SQL relational models) from high-bit binary storage arrays (SAN/NAS vaults), optimizing network speed and database integrity.

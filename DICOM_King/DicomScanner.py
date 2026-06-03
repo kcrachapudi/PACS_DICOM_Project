@@ -21,10 +21,10 @@ def push_file(file_path, server_ip="127.0.0.1", server_port=11112):
     ae.add_requested_context(ds.SOPClassUID)
     
     print(f"[1] Attempting network association handshake...")
-    print(f"    Calling AE: SCANNER_ROOM_1  --->  Called AE: SECTRA_MINI_PACS")
+    print(f"    Calling AE: SCANNER_ROOM_1  --->  Called AE: MINI_PACS")
     
     # Establish association with our server node
-    assoc = ae.associate(server_ip, server_port, ae_title="SECTRA_MINI_PACS")
+    assoc = ae.associate(server_ip, server_port, ae_title="MINI_PACS")
     
     if assoc.is_established:
         print("[2] Association Accepted! Handshake Cleared. Secure port open.")
@@ -48,5 +48,5 @@ def push_file(file_path, server_ip="127.0.0.1", server_port=11112):
 
 if __name__ == "__main__":
     # Point this to the original or your modified file path
-    target_file = "/home/augustus/Projects/Sectra_PACS_DICOM_Project/DICOM_King/Dicom-Test-Files/MR_small_anonymized.dcm"
+    target_file = "/home/augustus/Projects/PACS_DICOM_Project/DICOM_King/Dicom-Test-Files/MR_small_anonymized.dcm"
     push_file(target_file)

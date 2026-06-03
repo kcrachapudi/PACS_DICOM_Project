@@ -62,5 +62,5 @@ def generate_mock_pacs_data(template_path, storage_dir):
 
 if __name__ == "__main__":
     template = "Dicom-Test-Files/MR_small_anonymized.dcm"
-    vault = "/home/augustus/Projects/Sectra_PACS_DICOM_Project/DICOM_King/Pacs_Vault"
+    vault = "/home/augustus/Projects/PACS_DICOM_Project/DICOM_King/Pacs_Vault"
     generate_mock_pacs_data(template, vault)

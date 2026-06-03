@@ -3,8 +3,8 @@ import socket
 import json
 
 # Force absolute pathing to the root project folder
-BASE_DIR = "/home/augustus/Projects/Sectra_Project"
-WORKLIST_DIR = "/home/augustus/Projects/Sectra_Project/Scanner_Worklist"
+BASE_DIR = "/home/augustus/Projects/PACS_DICOM_Project"
+WORKLIST_DIR = "/home/augustus/Projects/PACS_DICOM_Project/Scanner_Worklist"
 
 # MLLP Protocol Wrappers
 VT, FS, CR = b'\x0b', b'\x1c', b'\x0d'

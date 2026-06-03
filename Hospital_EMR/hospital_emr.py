@@ -5,7 +5,7 @@ import time
 VT, FS, CR = b'\x0b', b'\x1c', b'\x0d'
 
 def listen_for_results():
-    """Simulates the hospital inbound port listening for Sectra's reports."""
+    """Simulates the hospital inbound port listening for reports."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind(('127.0.0.1', 5555))
@@ -19,7 +19,7 @@ def listen_for_results():
                 if data:
                     clean_msg = data.replace(VT, b'').replace(FS, b'').decode('utf-8')
                     print("\n" + "#"*60)
-                    print("[HOSPITAL EMR - NEW SCAN RESULT RECEIVED FROM SECTRA PACS]")
+                    print("[HOSPITAL EMR - NEW SCAN RESULT RECEIVED FROM PACS]")
                     print(clean_msg.replace('\r', '\n'))
                     print("#"*60 + "\n")
                     break
@@ -28,7 +28,7 @@ def send_hl7_order():
     """Sends the initial X-ray order to Mirth."""
     time.sleep(1)
     hl7_msg = (
-        "MSH|^~\\&|EPIC|HOSPITAL|SECTRA|PACS|202605191200||ORM^O01|MSG00002|P|2.3|" + "\r" +
+        "MSH|^~\\&|EPIC|HOSPITAL|PACS|202605191200||ORM^O01|MSG00002|P|2.3|" + "\r" +
         "PID|||999888^^^MRN||SMITH^JANE^||19850822|F|" + "\r" +
         "PV1||I|RAD-ROOM1||||5555^Dr^House||||||||||||VISIT88888|" + "\r" +
         "ORC|NW|ORD12345||||||202605191200|" + "\r" +
